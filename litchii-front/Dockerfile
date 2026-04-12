@@ -9,5 +9,5 @@ RUN npm run build -- --configuration=production
 # Run stage
 FROM nginx:alpine
 COPY --from=build /app/dist/litchii-front/browser /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/templates/default.conf.template
 EXPOSE 80
