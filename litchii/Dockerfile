@@ -13,4 +13,4 @@ WORKDIR /app
 COPY --from=build /app/build/libs/*.jar app.jar
 RUN mkdir -p /app/uploads
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Djava.net.preferIPv6Addresses=true", "-jar", "app.jar"]

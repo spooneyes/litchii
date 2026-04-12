@@ -274,7 +274,7 @@ export class HomeComponent {
   goToMailbox(): void {
     const trimmed = this.code.trim().toUpperCase();
     if (trimmed) {
-      this.router.navigate(['/m', trimmed]);
+      this.router.navigate(['/m/', trimmed]);
     }
   }
 }
