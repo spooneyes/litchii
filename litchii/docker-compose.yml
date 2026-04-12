@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: litchi-db
+    environment:
+      POSTGRES_DB: litchi
+      POSTGRES_USER: litchi
+      POSTGRES_PASSWORD: litchi_dev
+    ports:
+      - "5433:5432"
+    volumes:
+      - litchi-data:/var/lib/postgresql/data
+
+volumes:
+  litchi-data:

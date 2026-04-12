@@ -1,0 +1,49 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: litchi-db
+    environment:
+      POSTGRES_DB: litchi
+      POSTGRES_USER: litchi
+      POSTGRES_PASSWORD: litchi_dev
+    volumes:
+      - litchi-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U litchi']
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  backend:
+    build:
+      context: ./litchii
+    container_name: litchi-backend
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      DATABASE_URL: jdbc:postgresql://postgres:5432/litchi
+      DATABASE_USERNAME: litchi
+      DATABASE_PASSWORD: litchi_dev
+      APP_CORS_ALLOWED-ORIGINS: http://localhost
+      APP_STORAGE_PATH: /app/uploads
+      APP_MAILBOX_TTL-DAYS: 31
+      SPRING_JPA_HIBERNATE_DDL-AUTO: update
+      SPRING_SERVLET_MULTIPART_MAX-FILE-SIZE: 5MB
+      SPRING_SERVLET_MULTIPART_MAX-REQUEST-SIZE: 6MB
+    volumes:
+      - litchi-uploads:/app/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./litchii-front
+    container_name: litchi-frontend
+    ports:
+      - '80:80'
+    depends_on:
+      - backend
+
+volumes:
+  litchi-data:
+  litchi-uploads:

@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --litchi-50: #fdf2f4;
+  --litchi-100: #fce7eb;
+  --litchi-200: #f9d0d9;
+  --litchi-300: #f4a9b8;
+  --litchi-400: #ec7a93;
+  --litchi-500: #e04d6f;
+  --litchi-600: #cc2d55;
+  --litchi-700: #ab2045;
+  --litchi-800: #8f1d3d;
+  --litchi-900: #7a1c38;
+
+  --cream: #fef9f5;
+  --cream-dark: #f5ede6;
+  --text-primary: #2d1f2b;
+  --text-secondary: #6b5568;
+  --text-muted: #a0919d;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-pill: 100px;
+
+  --shadow-sm: 0 2px 8px rgba(171, 32, 69, 0.06);
+  --shadow-md: 0 4px 20px rgba(171, 32, 69, 0.1);
+  --shadow-lg: 0 8px 40px rgba(171, 32, 69, 0.14);
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', -apple-system, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--cream);
+  color: var(--text-primary);
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--litchi-200);
+  color: var(--litchi-900);
+}
