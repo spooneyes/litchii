@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [RouterLink, FormsModule],
   template: `
     <div class="home">
       <div class="hero">
@@ -22,6 +23,23 @@ import { RouterLink } from '@angular/router';
             <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
+
+        <div class="separator">
+          <span class="line"></span>
+          <span class="or">ou</span>
+          <span class="line"></span>
+        </div>
+
+        <div class="code-input">
+          <input
+            type="text"
+            [(ngModel)]="code"
+            placeholder="Entrez un code"
+            maxlength="10"
+            (keyup.enter)="goToMailbox()"
+          />
+          <button (click)="goToMailbox()" [disabled]="!code.trim()">Accéder</button>
+        </div>
       </div>
 
       <div class="features">
@@ -91,7 +109,9 @@ import { RouterLink } from '@angular/router';
 
     .actions {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
       margin-bottom: 4rem;
     }
 
@@ -120,6 +140,83 @@ import { RouterLink } from '@angular/router';
 
       &:active {
         transform: translateY(0);
+      }
+    }
+
+    .separator {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      max-width: 320px;
+
+      .line {
+        flex: 1;
+        height: 1px;
+        background: var(--litchi-200);
+      }
+
+      .or {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+    }
+
+    .code-input {
+      display: flex;
+      gap: 0.5rem;
+      width: 100%;
+      max-width: 320px;
+
+      input {
+        flex: 1;
+        padding: 0.7rem 1rem;
+        border: 2px solid var(--litchi-200);
+        border-radius: var(--radius-md);
+        background: white;
+        font-size: 1rem;
+        font-family: var(--font-body);
+        color: var(--text-primary);
+        text-align: center;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        outline: none;
+        transition: border-color 0.3s;
+
+        &:focus {
+          border-color: var(--litchi-400);
+        }
+
+        &::placeholder {
+          text-transform: none;
+          letter-spacing: normal;
+          color: var(--text-muted);
+        }
+      }
+
+      button {
+        padding: 0.7rem 1.2rem;
+        background: var(--litchi-50);
+        color: var(--litchi-600);
+        border: 2px solid var(--litchi-200);
+        border-radius: var(--radius-md);
+        cursor: pointer;
+        font-family: var(--font-body);
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition: all 0.3s;
+        white-space: nowrap;
+
+        &:hover:not(:disabled) {
+          background: var(--litchi-100);
+          border-color: var(--litchi-400);
+        }
+
+        &:disabled {
+          opacity: 0.4;
+          cursor: not-allowed;
+        }
       }
     }
 
@@ -169,4 +266,15 @@ import { RouterLink } from '@angular/router';
     }
   `,
 })
-export class HomeComponent {}
+export class HomeComponent {
+  code = '';
+
+  constructor(private router: Router) {}
+
+  goToMailbox(): void {
+    const trimmed = this.code.trim().toUpperCase();
+    if (trimmed) {
+      this.router.navigate(['/m', trimmed]);
+    }
+  }
+}
