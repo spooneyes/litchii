@@ -11,7 +11,7 @@ import { MessagePreview } from '../../services/mailbox.service';
       <div class="body">
         <div class="header">
           <strong>{{ message.senderName }}</strong>
-          <span class="date">{{ message.createdAt | date:'short' }}</span>
+          <span class="date">{{ message.createdAt | date:'dd/MM/yyyy HH:mm' }}</span>
         </div>
         <p class="excerpt">{{ message.contentPreview }}</p>
         @if (message.hasImage) {

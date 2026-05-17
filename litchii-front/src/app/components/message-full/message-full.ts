@@ -29,10 +29,7 @@ import { MessageFull } from '../../services/mailbox.service';
   <img [src]="'data:image/jpeg;base64,' + message.imageBase64" alt="Image jointe" />
 }
 
-        <div class="notice">
-          <span>🔥</span>
-          <p>Ce message a été supprimé après lecture</p>
-        </div>
+
       </div>
     </div>
   `,
