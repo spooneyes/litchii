@@ -19,7 +19,7 @@ import { MessageFull } from '../../services/mailbox.service';
           <div class="avatar">{{ message.senderName.charAt(0).toUpperCase() }}</div>
           <div>
             <strong>{{ message.senderName }}</strong>
-            <span class="date">{{ message.createdAt | date:'medium' }}</span>
+            <span class="date">{{ message.createdAt | date:'d MMMM y, HH:mm' }}</span>
           </div>
         </div>
 
